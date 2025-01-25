@@ -14,8 +14,8 @@ export type GalleryItem = GalleryItemProps;
 
 export default function GalleryItemDisplay(item: GalleryItem) {
   return (
-    <div className="flex flex-row gap-4 border-2 border-slate-300 p-4 rounded-lg">
-      <div className="w-1/2 flex flex-col gap-4">
+    <div className="flex flex-col sm:flex-row gap-4 border-2 border-slate-300 p-4 rounded-lg">
+      <div className="sm:w-1/2 flex flex-col gap-4">
         <h2 className="text-2xl font-bold">{item.title}</h2>
         <p className="text-lg">{item.description}</p>
         <Link
