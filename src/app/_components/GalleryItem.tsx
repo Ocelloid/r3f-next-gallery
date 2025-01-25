@@ -1,6 +1,8 @@
+import Link from "next/link";
 import FBXView from "./FBXView";
 
-export interface GalleryItemProps {
+interface GalleryItemProps {
+  id: string;
   title: string;
   description: string;
   url: string;
@@ -8,21 +10,23 @@ export interface GalleryItemProps {
   position?: number[];
 }
 
-export default function GalleryItem({
-  title,
-  description,
-  url,
-  scale,
-  position,
-}: GalleryItemProps) {
+export type GalleryItem = GalleryItemProps;
+
+export default function GalleryItemDisplay(item: GalleryItem) {
   return (
     <div className="flex flex-row gap-4 border-2 border-slate-300 p-4 rounded-lg">
       <div className="w-1/2 flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="text-lg">{description}</p>
+        <h2 className="text-2xl font-bold">{item.title}</h2>
+        <p className="text-lg">{item.description}</p>
+        <Link
+          href={`/item/${item.id}`}
+          className="text-blue-500 hover:underline"
+        >
+          Просмотреть в интерактивном режиме
+        </Link>
       </div>
       <div className="w-full flex flex-col">
-        <FBXView url={url} scale={scale} position={position} />
+        <FBXView url={item.url} scale={item.scale} position={item.position} />
       </div>
     </div>
   );

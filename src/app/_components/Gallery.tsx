@@ -1,10 +1,12 @@
-import GalleryItem, { GalleryItemProps } from "@/app/_components/GalleryItem";
+import GalleryItemDisplay, {
+  type GalleryItem,
+} from "@/app/_components/GalleryItem";
 
-export default function Gallery({ items }: { items: GalleryItemProps[] }) {
+export default function Gallery({ items }: { items: GalleryItem[] }) {
   return (
     <div className="flex flex-col gap-4">
       {items.map((item, index) => (
-        <GalleryItem key={index} {...item} />
+        <GalleryItemDisplay key={index} {...item} />
       ))}
     </div>
   );
