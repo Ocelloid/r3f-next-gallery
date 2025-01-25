@@ -1,5 +1,5 @@
 import Link from "next/link";
-import FBXView from "./FBXView";
+import DynamicFBXView from "@/app/_components/DynamicFBXView";
 
 interface GalleryItemProps {
   id: string;
@@ -26,7 +26,11 @@ export default function GalleryItemDisplay(item: GalleryItem) {
         </Link>
       </div>
       <div className="w-full flex flex-col">
-        <FBXView url={item.url} scale={item.scale} position={item.position} />
+        <DynamicFBXView
+          url={item.url}
+          scale={item.scale}
+          position={item.position}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import InteractiveView from "@/app/_components/InteractiveView";
+import DynamicInteractiveView from "@/app/_components/DynamicInteractiveView";
 import EXAMPLE_ITEMS from "@/items";
 import { notFound } from "next/navigation";
 
@@ -12,7 +12,7 @@ export default async function Item({
   if (!item) notFound();
   return (
     <div className="flex flex-col h-screen w-screen items-center justify-center">
-      <InteractiveView item={item} />
+      <DynamicInteractiveView item={item} />
     </div>
   );
 }
