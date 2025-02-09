@@ -25,7 +25,7 @@ function CameraControlsWrapper({ tgt, pos }: { tgt: Vector3; pos: Vector3 }) {
 export default function RoomView() {
   const router = useRouter();
   const fbx = useLoader(FBXLoader, "/room.fbx");
-  const boardFBX = useLoader(FBXLoader, "/Board.fbx");
+  // const boardFBX = useLoader(FBXLoader, "/Board.fbx");
   const board = useGLTF("/BoardGLB.glb");
   const [pos, setPos] = useState(new Vector3(0, 40, 0));
   const [tgt, setTgt] = useState(new Vector3());
