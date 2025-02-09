@@ -1,12 +1,13 @@
 "use client";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import { Vector3, type PerspectiveCamera as TPerspectiveCamera } from "three";
 import { Suspense, useRef, useState, useEffect } from "react";
-import { Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import RoundedButton from "./ui/RoundedButton";
 
 function CameraControlsWrapper({ tgt, pos }: { tgt: Vector3; pos: Vector3 }) {
   const ref = useRef<TPerspectiveCamera>(null);
@@ -24,6 +25,8 @@ function CameraControlsWrapper({ tgt, pos }: { tgt: Vector3; pos: Vector3 }) {
 export default function RoomView() {
   const router = useRouter();
   const fbx = useLoader(FBXLoader, "/room.fbx");
+  const boardFBX = useLoader(FBXLoader, "/Board.fbx");
+  const board = useGLTF("/BoardGLB.glb");
   const [pos, setPos] = useState(new Vector3(0, 40, 0));
   const [tgt, setTgt] = useState(new Vector3());
   const [active, setActive] = useState(false);
@@ -46,7 +49,8 @@ export default function RoomView() {
             castShadow
             intensity={10}
           />
-          <primitive object={fbx} scale={0.01} position={[0, -10, 0]} />
+          <primitive object={fbx} scale={0.01} position={[0, -10, 1]} />
+          <primitive object={board} scale={0.01} position={[0, -10, 0]} />
           <mesh
             position={[-5.75, 8, -19.5]}
             onPointerOver={() => setActive(true)}
@@ -59,43 +63,43 @@ export default function RoomView() {
           <CameraControlsWrapper tgt={tgt} pos={pos} />
         </Suspense>
       </Canvas>
-      <div className="flex flex-row w-full absolute items-center justify-center top-0 p-4 gap-2 bg-white/50 text-black">
-        <Button
-          variant="light"
-          size="sm"
-          onPress={() =>
-            handleMoveCamera(new Vector3(0, 40, 0), new Vector3(0, 0, 0))
-          }
+      <div className="flex flex-row w-full absolute items-center justify-center top-0 py-2 gap-2 bg-slate-950/75">
+        <RoundedButton
+          pull={0.1}
+          className="flex py-2 px-4 cursor-pointer items-center justify-center rounded-full text-white text-2xl"
+          onClick={() => {
+            handleMoveCamera(new Vector3(0, 40, 0), new Vector3(0, 0, 0));
+          }}
         >
           Ковёр
-        </Button>
-        <Button
-          variant="light"
-          size="sm"
-          onPress={() =>
-            handleMoveCamera(new Vector3(0, 2, 7), new Vector3(10, 0, 7))
-          }
+        </RoundedButton>
+        <RoundedButton
+          pull={0.1}
+          className="flex py-2 px-4 cursor-pointer items-center justify-center rounded-full text-white text-2xl"
+          onClick={() => {
+            handleMoveCamera(new Vector3(0, 2, 7), new Vector3(10, 0, 7));
+          }}
         >
           Аквариум
-        </Button>
-        <Button
-          variant="light"
-          size="sm"
-          onPress={() =>
-            handleMoveCamera(new Vector3(-5, 5, -2), new Vector3(-5, 5, -5))
-          }
+        </RoundedButton>
+        <RoundedButton
+          pull={0.1}
+          className="flex py-2 px-4 cursor-pointer items-center justify-center rounded-full text-white text-2xl"
+          onClick={() => {
+            handleMoveCamera(new Vector3(-5, 5, -2), new Vector3(-5, 5, -5));
+          }}
         >
           Доска
-        </Button>
-        <Button
-          variant="light"
-          size="sm"
-          onPress={() =>
-            handleMoveCamera(new Vector3(-2, 7, 0), new Vector3(5, 3, -5))
-          }
+        </RoundedButton>
+        <RoundedButton
+          pull={0.1}
+          className="flex py-2 px-4 cursor-pointer items-center justify-center rounded-full text-white text-2xl"
+          onClick={() => {
+            handleMoveCamera(new Vector3(-2, 7, 0), new Vector3(5, 3, -5));
+          }}
         >
           Стол
-        </Button>
+        </RoundedButton>
       </div>
     </div>
   );
